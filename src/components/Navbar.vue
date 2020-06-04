@@ -26,7 +26,7 @@
         </div>
 
         <div class="navbar-end">
-          <a class="navbar-item" @click="showCart">
+          <a data-testId="cart" class="navbar-item" @click="showCart">
             <span class="icon">
               <i class="mdi mdi-32px mdi-cart"></i>
               <span

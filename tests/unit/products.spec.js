@@ -5,6 +5,11 @@ import sinon from 'sinon'
 import Products from '@/components/Products.vue'
 
 describe('Products.vue', () => {
+  let mockProduct = [{
+    name: 'Computadora',
+    price: 100.0,
+    qty: 1,          
+  }]
   it('Muestra el titulo "Nuestros Productos"', () => {
     const title = 'Nuestros Productos'
     const wrapper = shallowMount(Products, {})
@@ -12,37 +17,39 @@ describe('Products.vue', () => {
   }),
   it('Muestra los productos', () => {
     const productName = 'Computadora'
-    const wrapper = shallowMount(Products, {})
-    wrapper.vm.products = [{
-      name: 'Computadora',
-      price: 100.0,
-      qty: 1,
-    }]
+    const wrapper = shallowMount(Products, {
+      data() {
+        return {
+          products: mockProduct
+        }
+      },
+    })
     expect(wrapper.text()).to.include(productName)
   }),
   it('Filtra los productos', () => {
-    const productName = 'Computadora'
     const productSearch = 'Teclado'
-    const wrapper = shallowMount(Products, {})
+    const wrapper = shallowMount(Products, {
+      data() {
+        return {
+          products: mockProduct
+        }
+      },
+    })
     const searchBox = wrapper.find('input')
-    wrapper.vm.products = [{
-      name: 'Computadora',
-      price: 100.0,
-      qty: 1,
-    }]
     searchBox.setValue(productSearch)
-    expect(wrapper.text()).to.not.include(productName)
+    expect(wrapper.text()).to.not.include(mockProduct[0].name)
   }),
   it('Añade los productos al carro', () => {
-    const wrapper = shallowMount(Products, {})
     const clickMethodStub = sinon.stub()
-    wrapper.vm.products = [{
-      name: 'Computadora',
-      price: 100.0,
-      qty: 1,
-    }]
-    wrapper.setMethods({
-      addToCart: clickMethodStub
+    const wrapper = shallowMount(Products, {
+      data() {
+        return {
+          products: mockProduct
+        }
+      },
+      methods: {
+        addToCart: clickMethodStub
+      },
     })
     const addButton = wrapper.find('.card .button')
     addButton.trigger('click')

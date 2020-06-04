@@ -109,7 +109,7 @@ export default new Vuex.Store({
       })
     },
     updateShowCart({commit}, val) {
-      console.log('setting showCart to ', val)
+      // console.log('setting showCart to ', val)
       return new Promise((resolve, reject) => {
         try {
           commit('UPDATE_SHOW_CART', !!val) // !! double-negation for Boolen casting
