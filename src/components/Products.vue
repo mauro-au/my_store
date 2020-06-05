@@ -32,9 +32,7 @@
         <!-- Item -->
         <div class="card has-equal-height">
           <div class="image-card">
-            <div class="image has-spacing image is-16by9">
-              <!-- <img alt="product logo" src="../assets/product.png"> -->
-              <!-- <img alt="product logo" :src="getImgUrl(img)"> -->
+            <div class="image has-spacing image">
               <img alt="product logo" :src="'/img/'+p.img">
             </div>
           </div>
@@ -101,10 +99,6 @@ export default {
       // reset qty
       product.qty = 1
     },
-    // getImgUrl(img) {
-    //   var images = require.context('../assets/img/', false, /\.jpg$/)
-    //   return images('./' + img)
-    // }
   },
   computed: {
     computedProductList() {
